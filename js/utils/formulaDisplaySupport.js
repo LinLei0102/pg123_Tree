@@ -163,7 +163,10 @@ function pointFormulaDisplay(){
         }
         if (hasMilestone("or", 23))     c += "Organ Milestone 23 multiplies CX by " + format(player.or.energy.points.max(1).pow(.01 * player.or.milestones.length)) + br
         if (hasUpgrade("an", 25))       c += "Animal X multiplies CX by " + format(player.or.air.points.max(1).pow(.01 * player.an.upgrades.length)) + br
-        if (hasUpgrade("nu", 32))       c += "Nucleuses XII multiplies CX by " + format(player.or.points.max(1).pow(player.ch.points)) + br
+        if (hasUpgrade("nu", 32)) {
+                const eff = hasMilestone("hu", 12) ? player.or.points.max(1).log10().pow(3).pow10().pow(player.ch.points) : player.or.points.max(1).pow(player.ch.points)
+                c += "Nucleuses XII multiplies CX by " + format(eff) + br
+        }
 
         let ret = a + br + b + br2 + c
         ret = ret.replaceAll("AX", makeRed("A"))
